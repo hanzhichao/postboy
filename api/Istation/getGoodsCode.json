@@ -1,0 +1,11 @@
+{
+  "url": "http://192.168.100.238:8089/api/Istation/getGoodsCode",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "data": {
+    "area_name": "北京省",
+    "lng": "116.337909",
+    "lat": "39.950365"
+  }
+}

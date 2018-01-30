@@ -1,0 +1,11 @@
+{
+  "url": "http://192.168.100.238:8082/api/user/getInfoById",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "id": "51"
+  },
+  "remark":"根据用户ID获取用户信息"
+}
