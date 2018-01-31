@@ -1,10 +1,14 @@
 {
   "url": "http://192.168.100.238:8089/api/Istation/matchStation",
-  "headers": {
-    "Content-Type": "application/json"
+  "sign": {
+    "accessId": "CORE0002",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
   },
+  "concurrency": 2,
+  "times": 4,
   "data": {
     "lng": "116.334223",
     "lat": "39.975377"
-  }
+  },
+  "remark": "经纬度匹配站点"
 }
