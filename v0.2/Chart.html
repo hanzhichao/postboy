@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://www.highcharts.com/highslide/highslide.css" rel="stylesheet" />
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/highcharts-more.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/modules/heatmap.js"></script>
+        <script type="text/javascript" src="https://code.highcharts.com/modules/exporting.js"></script>
+    </head>
+    <body style="margin:0;padding:0">
+                <div id="container" style="">Loading....</div>
+
+
+    <script>
+        $(function(){
+
+
+
+
+
+            Highcharts.setOptions({"global": {}, "lang": {}});
+            var option = {"chart": {"renderTo": "container", "inverted": true}, "colors": {}, "credits": {"enabled": false}, "drilldown": {}, "exporting": {}, "labels": {}, "legend": {"enabled": false}, "loading": {}, "navigation": {}, "pane": {}, "plotOptions": {}, "series": {}, "subtitle": {"text": "\u54cd\u5e94\u65f6\u95f4/\u541e\u5410\u91cf/\u7ebf\u7a0b\u6570"}, "title": {"text": "LoadBoy \u63a5\u53e3\u8d1f\u8f7d\u56fe"}, "tooltip": {"headerFormat": "<b>{series.name}</b><br/>", "pointFormat": "{point.x} km: {point.y}\u00b0C"}, "xAxis": {"reversed": false, "title": {"enabled": true, "text": "\u54cd\u5e94\u65f6\u95f4"}, "labels": {"formatter": function () {                    return this.value + " t/s";                }}, "maxPadding": 0.05, "showLastLabel": true}, "yAxis": {"title": {"text": "\u7ebf\u7a0b\u6570"}, "labels": {"formatter": function () {                    return this.value + '';                }}, "lineWidth": 2}};
+
+
+ 
+
+            var chart = new Highcharts.Chart(option);
+
+            var data = [{"data": [[66.73503939217932, 9], [77.94660242961757, 13], [91.85606009272146, 17], [86.34571379803249, 19], [89.58185491908728, 21], [88.2509102868969, 23], [86.128808973867, 25], [88.86930715911261, 27], [91.46629218042939, 29], [89.02651476948797, 30], [89.30483848888183, 32]], "type": "spline", "marker": {"enabled": false}, "name": "tps"}, {"data": [[0.1348616870833032, 9], [0.16678084220205033, 13], [0.18507216598273252, 17], [0.220045664854217, 19], [0.23442247337887523, 21], [0.26062054119587863, 23], [0.29026292477335247, 25], [0.30381692918634884, 27], [0.3170566916913354, 29], [0.3369782595407395, 30], [0.3583232503576377, 32]], "type": "line", "marker": {"enabled": false}, "name": "rt"}];
+            var dataLen = data.length;
+            for (var ix = 0; ix < dataLen; ix++) {
+                chart.addSeries(data[ix]);
+            }
+ 
+
+
+
+
+
+
+
+        
+    });
+        </script>
+
+    </body>
+</html>

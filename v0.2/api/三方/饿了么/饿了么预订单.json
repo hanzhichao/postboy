@@ -1,0 +1,86 @@
+{
+  "remark": "饿了么下预订单",
+  "url": "http://dev2.spicespirit.com/order/eleme/create",
+  "data": {
+    "requestId": "200011191110304071",
+    "type": 10,
+    "appId": 51771218,
+    "message": {
+      "id": "3019182461388034129",
+      "orderId": "3019182461388034129",
+      "address": "上海永泉制衣有限公司建设公路2270 测试",
+      "createdAt": "2018-02-02T12:28:24",
+      "activeAt": "2018-02-02T12:28:24",
+      "deliverFee": 0,
+      "deliverTime": "2018-02-03T08:00:00",
+      "description": "",
+      "groups": [
+        {
+          "name": "1号篮子",
+          "type": "normal",
+          "items": [
+            {
+              "id": 1238596273,
+              "skuId": 200000039522583879,
+              "name": "麻辣豆皮",
+              "categoryId": 1,
+              "price": 0.01,
+              "quantity": 1,
+              "total": 0.01,
+              "additions": [],
+              "newSpecs": [],
+              "attributes": [],
+              "extendCode": "DP",
+              "barCode": "",
+              "weight": 1,
+              "userPrice": 0,
+              "shopPrice": 0,
+              "vfoodId": 1237161415
+            }
+          ]
+        }
+      ],
+      "invoice": null,
+      "book": true,
+      "onlinePaid": true,
+      "railwayAddress": null,
+      "phoneList": [
+        "18010181267"
+      ],
+      "shopId": 156934054,
+      "shopName": "麻辣诱惑2.0测测试店铺",
+      "daySn": 1,
+      "status": "unprocessed",
+      "refundStatus": "noRefund",
+      "userId": 9165291,
+      "totalPrice": 0.01,
+      "originalPrice": 0.01,
+      "consignee": "韩志超",
+      "deliveryGeo": "121.45584008,31.66498004",
+      "deliveryPoiAddress": "上海永泉制衣有限公司建设公路2270 测试",
+      "invoiced": false,
+      "income": 0.01,
+      "serviceRate": 0,
+      "serviceFee": 0,
+      "hongbao": 0,
+      "packageFee": 0,
+      "activityTotal": 0,
+      "shopPart": 0,
+      "elemePart": 0,
+      "downgraded": false,
+      "vipDeliveryFeeDiscount": 0,
+      "openId": "",
+      "secretPhoneExpireTime": null,
+      "orderActivities": [],
+      "invoiceType": null,
+      "taxpayerId": "",
+      "coldBoxFee": 0,
+      "cancelOrderDescription": null,
+      "cancelOrderCreatedAt": null
+    },
+    "shopId": 156934054,
+    "timestamp": 1517545703983,
+    "signature": "555CBDD42D56BCB674568D31A4FDE1DA",
+    "userId": 222355688456290670
+  }
+}
