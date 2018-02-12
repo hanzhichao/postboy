@@ -1,5 +1,18 @@
-[
-  {
+[{
+    "url": "http://192.168.100.238:8089/api/Istation/matchStation",
+    "sign": {
+      "accessId": "CORE0002",
+      "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+    },
+    "data": {
+      "lng": "116.334223",
+      "lat": "39.975377"
+    },
+    "store":{
+      "code": "$response.code"
+    }
+},
+{
     "url": "http://192.168.100.238:8089/api/Istation/matchStation",
     "sign": {
       "accessId": "CORE0002",
@@ -9,16 +22,5 @@
       "lng": "116.334223",
       "lat": "39.975377"
     }
-  },
-  {
-    "url": "http://192.168.100.238:8089/api/Istation/matchStation",
-    "sign": {
-      "accessId": "CORE0002",
-      "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
-    },
-    "data": {
-      "lng": "116.334223",
-      "lat": "39.975377"
-    }
-  }
+}
 ]

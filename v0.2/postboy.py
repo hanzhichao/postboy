@@ -16,6 +16,8 @@ from sign import sign_params
 if (platform.python_version()) < '3':
     import codecs
     import ConfigParser
+    reload(sys)
+    sys.setdefaultencoding('utf8')
 else:
     import configparser as ConfigParser
 
@@ -23,7 +25,7 @@ else:
 def load_config(path, section='default'):
     if (platform.python_version()) < '3':
         conf = ConfigParser.ConfigParser()
-        with open(path, encoding='utf-8') as f:
+        with codecs.open(path, encoding='utf-8') as f:
             conf.readfp(f)
     else:
         conf = ConfigParser.RawConfigParser()
@@ -38,7 +40,7 @@ def load_config(path, section='default'):
 def load_json(path):
     """加载json文件,:param path: json文件路径 :return 字典格式"""
     if (platform.python_version()) < '3':
-        with codes.open(path, encoding='utf-8') as f:
+        with codecs.open(path, encoding='utf-8') as f:
             try:
                 return json.load(f)
             except json.decoder.JSONDecodeError:
