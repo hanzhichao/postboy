@@ -1,0 +1,34 @@
+{
+  "uri": "https://open.shop.ele.me/api/invoke?method=ApplicationApIService.updateSandboxEnvironment",
+  "headers": {
+    "Content-type": "application/json;charset=UTF-8"
+  },
+  "cookies": {
+    "perf_ssid": "bkuzbkhr8tld9gii0mghidoyipto7agi_2018-01-19",
+    "ubt_ssid": "vh7wd03rsj3rzxojry8hmkmyf5qlt69d_2018-01-19",
+    "_utrace": "63719ff49a591288e5bc8e01c60cd719_2018-01-19"
+  },
+  "data": {
+    "id": "db21b210-ac10-4078-94f1-daad59e7ed2e",
+    "method": "updateSandboxEnvironment",
+    "service": "ApplicationApIService",
+    "params": {
+      "sandBoxCondition": {
+        "appId": 51771218,
+        "pushUrl": "http://dev2.spicespirit.com/order/eleme/create",
+        "subscribeMessage": [
+          "10",
+          "14"
+        ],
+        "callBackUrl": "http://dev2.spicespirit.com/order/eleme/create",
+        "retryCount": 3
+      }
+    },
+    "metas": {
+      "appName": "Odin",
+      "appVersion": "4.4.0",
+      "ksid": "NWIyMDg1MTEtMWQ4Yi00NzQzLWJjMTYjAwYT"
+    },
+    "ncp": "2.0.0"
+  }
+}

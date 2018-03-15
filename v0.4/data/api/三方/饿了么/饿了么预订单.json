@@ -1,6 +1,8 @@
 {
   "remark": "饿了么下预订单",
-  "url": "http://dev2.spicespirit.com/order/eleme/create",
+  "url": "http://pre.stock.spicespirit.com/order/eleme/create",
+  "concurrency": 10,
+  "times": 100,
   "data": {
     "requestId": "200011191110304071",
     "type": 10,

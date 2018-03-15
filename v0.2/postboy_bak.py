@@ -100,13 +100,12 @@ class PostBoy(object):
     def __init__(self, config_file=os.path.join(os.path.dirname(__file__), 'default.conf')):
         self.config = load_config(config_file)
         self.body_list = []
-        # self.file_data = {}
-        # self.data_index = 0
+        self.file_data = {}
 
 
     def read_api(self, api_file):
         api_list = []
-        params = {}
+        params = []
         api = load_json(api_file)
         if isinstance(api, dict):
             api_list.append(api)
@@ -129,30 +128,30 @@ class PostBoy(object):
             
 
             # handle data file
-            # for key in api['data'].keys():
-            #     if api['data'][key][:2] == '${' and  api['data'][key][-1] == '}':
-            #         tmp_param = api['data'][key][2:-1]
-            #         # print(tmp_param)
-            #         if "|" in tmp_param:
-            #             tmp_list = tmp_param.split("|")
-            #             if tmp_list[0].lower() == 'file':
-            #                 with open(tmp_list[1],'r') as f:
-            #                     lis = [x.strip().split(",") for x in f ]
+            for key in api['data'].keys():
+                if api['data'][key][:2] == '${' and  api['data'][key][-1] == '}':
+                    tmp_param = api['data'][key][2:-1]
+                    # print(tmp_param)
+                    if "|" in tmp_param:
+                        tmp_list = tmp_param.split("|")
+                        if tmp_list[0].lower() == 'file':
+                            with open(tmp_list[1],'r') as f:
+                                lis = [x.strip().split(",") for x in f ]
 
-            #                 data_cols = list(zip(*lis))
-            #                 # print(list(zip(*lis)))
-            #                 # for x in zip(*lis):
-            #                 #     print(x)
-            #                 if tmp_list[2][0] == '$' and tmp_list[2][1:].isdigit():
-            #                     index = int(tmp_list[2][1:])
-            #                     # print(index)
-            #                     # print(data_cols[index])
-            #                     self.file_data[key] = list(data_cols[index])
-            #                     api['data'][key] = self.file_data[key][self.data_index]
-            #                     # first = self.file_data[0]
-            #                     # api['data'][key] = first
-            #                     # self.file_data.append(first)
-            #                     # self.file_data.pop(0)
+                            data_cols = list(zip(*lis))
+                            # print(list(zip(*lis)))
+                            # for x in zip(*lis):
+                            #     print(x)
+                            if tmp_list[2][0] == '$' and tmp_list[2][1:].isdigit():
+                                index = int(tmp_list[2][1:])
+                                # print(index)
+                                # print(data_cols[index])
+
+                                self.file_data[key] = list(data_cols[index])
+                                # first = self.file_data[0]
+                                # api['data'][key] = first
+                                # self.file_data.append(first)
+                                # self.file_data.pop(0)
 
 
                                 # tmp_data = f.readlines()
@@ -164,6 +163,11 @@ class PostBoy(object):
                             #     line = line.split(',')
                             #     lines.append(line)
                             # print(lines)
+
+
+
+
+
 
 
             # need sign or not
@@ -210,15 +214,16 @@ class PostBoy(object):
             self.body_list.append(params)
 
 
-    # def change_data(self):
-    #     for i in range(0, len(self.body_list)):
-    #         for key in self.file_data.keys():
-    #             first = self.file_data[key][0]
-    #             print(self.body_list,i,first,type(self.body_list[i]))
-                # self.body_list[i]['data'][key] = first
-                # api['data'][key] = first
-                # self.file_data[key].append(first)
-                # self.file_data[key].pop(0)
+    def change_data(self):
+        
+        for i in range(0, len(self.body_list)):
+            for key in self.file_data.keys():
+                first = self.file_data[key][0]
+                self.body_list[i]['data'][key] = first
+                api['data'][key] = first
+                self.file_data[key].append(first)
+                self.file_data[key].pop(0)
+            
 
 
     def post(self, api_file):
@@ -276,11 +281,11 @@ main()
 # post('api/getGoodsCode.json', 'http://detail.spicespirit.com') 
 
 # print(load_json("D:\Projects\postboy\api\Istation\matchStation.json"))
-# postboy = PostBoy()
-# postboy.read_api("D:/Projects/postboy/v0.4/data/api/shop/matchStation.json")
-# print(postboy.body_list[0]['data'])
+postboy = PostBoy()
+postboy.read_api("D:/Projects/postboy/v0.4/data/api/shop/matchStation.json")
+print(postboy.body_list[0]['data'])
 # print(postboy.file_data)
-# postboy.change_data()
+
 # postboy.read_api("D:/Projects/postboy/v0.4/data/api/shop/matchStation.json")
 # print(postboy.body_list)
 # print(postboy.file_data)

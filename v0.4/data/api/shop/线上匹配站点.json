@@ -1,0 +1,11 @@
+{
+  "url": "http://59.110.11.14:8095/api/Istation/matchStation",
+  "sign": {
+    "accessId": "SHOP0001",
+    "accessKey": "q3wkv02nfydm2c4i5lge1qur21nk4nlk"
+  },
+  "data": {
+    "lng": "116.655906",
+    "lat": "39.917684"
+  }
+}

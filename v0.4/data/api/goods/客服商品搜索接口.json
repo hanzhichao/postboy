@@ -1,0 +1,11 @@
+{
+  "url": "http://192.168.100.238:8131/api/Igoods/customerSearchGoods",
+  "sign": {
+    "accessId": "station",
+    "accessKey": "NTA3ZTU2ZWM5ZmVkYTVmMDBkMDM3YTBi"
+  },
+  "data": {
+    "code": "MX",
+    "station_id": "57"
+  }
+}
