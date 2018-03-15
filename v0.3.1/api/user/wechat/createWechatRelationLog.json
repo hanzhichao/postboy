@@ -1,0 +1,18 @@
+{
+  "url": "http://192.168.100.238:8082/api/wechat/createWechatRelationLog",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "open_id": "oIBjKjlzncb7WQ1k9wy6xNIKeMNM",
+    "nickname": "",
+    "avatar": "",
+    "status": "",
+    "pusher_id": "",
+    "seo_people": "",
+    "seo_department": "",
+    "seo_station": ""
+  },
+  "remark": "创建用户微信关注关系日志记录"
+}

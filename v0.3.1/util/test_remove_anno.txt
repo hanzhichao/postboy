@@ -1,0 +1,20 @@
+{  
+    /* hlhoj */
+       "Result":true,  //标识请求是否成功    
+       /* I am
+       holjlhlga
+       @hoanzhichao
+       //hangljoijhagj
+        shuai  */  
+       "Detail":  
+       {  
+             "Title":"图书馆召开2014年度电子文献资源议标（询价）会",  //标题  
+             "Publisher":"图书馆",  //发布者  
+             "Date":"2014-6-25",  //发布日期  
+             "Passage":"<p><font>,　　为了N……", //正文  
+             "yuan":"http://de/maxiaya"    //wewewwewew    
+
+       }  
+
+       /*666666*/
+  } 

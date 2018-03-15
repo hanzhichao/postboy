@@ -1,0 +1,86 @@
+{
+  "remark": "饿了么红包-匿名-发票订单",
+  "url": "http://dev2.spicespirit.com/order/eleme/create",
+  "data": {
+    "requestId": "200011420372448583",
+    "type": 10,
+    "appId": 51771218,
+    "message": {
+      "id": "3019425115094880337",
+      "orderId": "3019425115094880337",
+      "address": "上海永泉制衣有限公司建设公路2270 测试",
+      "createdAt": "2018-02-07T16:53:43",
+      "activeAt": "2018-02-07T16:53:43",
+      "deliverFee": 0,
+      "deliverTime": null,
+      "description": "",
+      "groups": [
+        {
+          "name": "1号篮子",
+          "type": "normal",
+          "items": [
+            {
+              "id": 1274943444,
+              "skuId": 200000076742086983,
+              "name": "过水捞面（原味）",
+              "categoryId": 1,
+              "price": 25,
+              "quantity": 1,
+              "total": 25,
+              "additions": [],
+              "newSpecs": [],
+              "attributes": [],
+              "extendCode": "LM",
+              "barCode": "",
+              "weight": 1,
+              "userPrice": 0,
+              "shopPrice": 0,
+              "vfoodId": 1269780646
+            }
+          ]
+        }
+      ],
+      "invoice": "麻辣诱惑测试20170925",
+      "book": false,
+      "onlinePaid": true,
+      "railwayAddress": null,
+      "phoneList": [
+        "9501359920998"
+      ],
+      "shopId": 156934054,
+      "shopName": "麻辣诱惑2.0测测试店铺",
+      "daySn": 4,
+      "status": "unprocessed",
+      "refundStatus": "noRefund",
+      "userId": 9165291,
+      "totalPrice": 22,
+      "originalPrice": 25,
+      "consignee": "韩志超",
+      "deliveryGeo": "121.45584008,31.66498004",
+      "deliveryPoiAddress": "上海永泉制衣有限公司建设公路2270 测试",
+      "invoiced": true,
+      "income": 25,
+      "serviceRate": 0,
+      "serviceFee": 0,
+      "hongbao": -3,
+      "packageFee": 0,
+      "activityTotal": 0,
+      "shopPart": 0,
+      "elemePart": 0,
+      "downgraded": false,
+      "vipDeliveryFeeDiscount": 0,
+      "openId": "",
+      "secretPhoneExpireTime": "2018-02-07T19:25:50",
+      "orderActivities": [],
+      "invoiceType": "company",
+      "taxpayerId": "123456789012345",
+      "coldBoxFee": 0,
+      "cancelOrderDescription": null,
+      "cancelOrderCreatedAt": null
+    },
+    "shopId": 156934054,
+    "timestamp": 1517993623117,
+    "signature": "84029201EBC985EED5E741375C9B9B2C",
+    "userId": 222355688456290670
+  }
+}
