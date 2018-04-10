@@ -1,0 +1,16 @@
+{
+  "url": "/api/Istation/matchStation",
+  "sign": {
+    "accessId": "station",
+    "accessKey": "NTA3ZTU2ZWM5ZmVkYTVmMDBkMDM3YTBi"
+  },
+  "headers": {
+    "Content-Type": "application/json;charset=utf-8"
+  },
+  "concurrency": 2,
+  "times": 4,
+  "data": {
+    "lng": "116.123",
+    "lat": "39.890358"
+  }
+}

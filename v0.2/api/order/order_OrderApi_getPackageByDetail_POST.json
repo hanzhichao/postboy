@@ -1,0 +1,12 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/getPackageByDetail",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "code": "201802090302100001",
+    "detail_id": "121212"
+  },
+  "remark": "通过order_detail_id和order_code查询o_order_package表"
+}

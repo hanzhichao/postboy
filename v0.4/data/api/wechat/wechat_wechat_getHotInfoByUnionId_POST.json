@@ -1,0 +1,11 @@
+{
+  "url": "http://192.168.100.238:8082/api/wechat/getHotInfoByUnionId",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "union_id": "osss4v_f--ppnlrzobEYdtpiUmhw"
+  },
+  "remark":"根据union_id获取热辣生活微信信息"
+}

@@ -1,0 +1,11 @@
+{
+  "url": "http://test.spicespirit.com/supply/SCollating/createData",
+  "login_required": true,
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+  },
+  "data": {
+    "station_id": "57"
+  },
+  "remark": "生成站点数据"
+}

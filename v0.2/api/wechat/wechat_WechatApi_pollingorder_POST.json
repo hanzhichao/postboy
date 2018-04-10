@@ -1,0 +1,7 @@
+{
+  "url": "http://pre.wechat.spicespirit.com/api/WechatApi/polling",
+  "data": {
+    "order_code": "1111"
+  },
+  "remark": "线上支付轮询"
+}

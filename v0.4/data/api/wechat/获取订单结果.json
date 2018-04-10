@@ -1,0 +1,13 @@
+{
+  "url": "http://test.spicespirit.com/api/ITakeaway/w",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  "cookies": {
+    "PHPSESSID": "fd34e161b19433fb1cb39150cb5f17dc"
+  },
+  "data": {
+    "messageId": ""
+  },
+  "remark": "微信下单轮询接口"
+}

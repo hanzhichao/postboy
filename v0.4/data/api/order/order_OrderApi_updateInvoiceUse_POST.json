@@ -1,0 +1,11 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/getByCode",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "order_code": "201803271835218080001"
+  },
+  "remark": "修改订单发票为已开"
+}

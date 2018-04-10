@@ -1,0 +1,11 @@
+{
+  "url": "http://192.168.100.238:8082/api/user/getUserByPhone",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "phone": "15083083253"
+  },
+  "remark":"通过手机号获取用户信息"
+}

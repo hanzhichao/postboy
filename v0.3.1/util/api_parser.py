@@ -24,16 +24,23 @@ ch = logging.StreamHandler()
 ch.setLevel(logging.DEBUG)
 logger.addHandler(ch)
 
+def exec_time(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        t0 = time.time()
+        back = func(*args, **kwargs)
+        print(func.__name__ + " --- " + str(time.time()-t0) + "s")
+        return back
+    return wrapper
 
-
-
+@exec_time
 def handle_session(api):
     if api.get('login_required'):
         return login()
     else:
         return requests.Session()
 
-
+@exec_time
 def handle_url(api):
     url = api.get('url')
     if not url:
@@ -46,7 +53,7 @@ def handle_url(api):
         url = base_url + uri
     return url   # 可能为空或不合法
 
-
+@exec_time
 def handle_headers(api):
     headers = api.get('headers')
     if headers:
@@ -61,7 +68,7 @@ def handle_headers(api):
     else:
         return {}
 
-
+@exec_time
 def handle_cookies(api):
     cookies = api.get('cookies')
     if cookies:
@@ -78,6 +85,7 @@ def handle_cookies(api):
 
 
 # must before handle data
+@exec_time
 def handle_source(apis):
     sources = {}
     for api in apis:
@@ -90,7 +98,7 @@ def handle_source(apis):
                 print("source参数类型错误, 应为dict类型")
     return sources
 
-
+@exec_time
 def handle_data(api, sources):
     data = copy.deepcopy(api).get('data')
 
@@ -125,6 +133,8 @@ def handle_data(api, sources):
                     data= json.dumps(data)
     return data
 
+
+@exec_time
 def handle_response(res, api):
     store_response = api.get('store_response')
     if store_response and isinstance(store_response, dict):
@@ -137,6 +147,7 @@ def handle_response(res, api):
 
 
 # 要求api是原来的api
+@exec_time
 def format_api(api, sources):
     api = copy.deepcopy(api)
     api['session'] = handle_session(api)

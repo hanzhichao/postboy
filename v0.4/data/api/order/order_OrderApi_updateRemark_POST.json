@@ -1,0 +1,12 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/updateRemark",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "order_code": "201803271835218080001",
+    "remark":"XXX"
+  },
+  "remark": "更新订单备注"
+}

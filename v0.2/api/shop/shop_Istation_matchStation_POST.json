@@ -1,0 +1,14 @@
+{
+  "url": "http://192.168.100.238:8089/api/Istation/matchStation",
+  "sign": {
+    "accessId": "station",
+    "accessKey": "NTA3ZTU2ZWM5ZmVkYTVmMDBkMDM3YTBi"
+  },
+  "headers": {
+    "Content-Type": "application/json;charset=utf-8"
+  },
+  "data": {
+    "lng": "116.123",
+    "lat": "39.890358"
+  }
+}

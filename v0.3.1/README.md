@@ -28,28 +28,55 @@
 ```
 2. 最多参数样例
 ```
-{
-  "uri": "/api/ITakeaway/w",
-  "headers": {"Connection": "keep-alive","Content-Type": "application/x-www-form-urlencoded"},
-  "cookies": {"PHPSESSID": "fd34e161b19433fb1cb39150cb5f17dc","perf_ssid": "bkuzbkhr8tld9gii0mghidoyipto7agi_2018-01-19"},
-  "concurrency": "5",
-  "times": "10",
-  "format_data": true,
-  "data": {
-    "params": "%s"
+[
+  {
+    "url": "http://192.168.100.238:8089/api/Istation/matchStation",
+    "data": {
+      "lng": "116.123",
+      "lat": "93.123"
+    }
   },
-  "_params": {
-    "address_id": "64948",
-    "delivery_date": "2018-01-18",
-    "products": [
-      {
-        "id": "23",
-        "num": "1"
-      }
+  {
+    "method": "POST",
+    "uri": "/api/Istation/matchStation",
+    "headers": {
+      "Content-Type": "application/json; utf-8"
+    },
+    "cookies": {},
+    "data": {
+      "lng": "${data1[0]}",
+      "lat": "${data1[1]}"
+    },
+    "session": "login",
+    "source": {
+      "data1": "data.txt",
+      "data2": "data.txt"
+    },
+    "sign": "station",
+    "store_response": {
+      "code": "response.code"
+    },
+    "concurrency": 1,
+    "times": 2,
+    "tags": [
+      "sample",
+      "no-run"
     ],
-  },
-  "remark": "最多参数样例",
-}
+    "setup": {
+      "DB-198": [
+        "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='DP';",
+        "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='MX';"
+      ]
+    },
+    "teardown": {
+      "DB-198": [
+        "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='DP';",
+        "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='MX';"
+      ]
+    },
+    "assert": "response.code == \"100000\""
+  }
+]
 ```
 
 ## Sublime Text  编译json接口，使用方法

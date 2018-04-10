@@ -1,0 +1,14 @@
+{
+  "url": "http://weixin-admin.spicespirit.com/api/wechat/Robot",
+  "headers": {
+    "Content-Type": "application/json;charset=utf-8"
+  },
+  "sign": {
+    "accessId": "WECHAT0001",
+    "accessKey": "q3ekv02nfydm2c4i5lge1qur21nk4nlk"
+  },
+  "data": {
+    "platform": "abccc11",
+    "keyword": "222"
+  }
+}

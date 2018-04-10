@@ -1,0 +1,21 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/updateDetail",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "code": "201802090302100001",
+    "goods": [
+      {
+        "goods_code": "SLZ",
+        "stock_status": "1"
+      },
+      {
+        "goods_code": "SLZ",
+        "stock_status": "1"
+      }
+    ]
+  },
+  "remark": "根据订单code和商品code更新订单详情表"
+}

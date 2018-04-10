@@ -6,7 +6,7 @@ class Worker(Thread):
     def __init__(self):
         Thread.__init__(self)
         self.work_queue = None
-        self.work_results = None
+        self.work_results = {}
 
     def set_work_queue(self, work_queue):
         self.work_queue = work_queue
@@ -15,11 +15,12 @@ class Worker(Thread):
         self.work_results = work_results
 
     def run(self):
-        while(true):
-            api = this.work_queue.pool()
-            if not api:
-                break
-            response_list = self.post(api) 
+        while not self.work_queue.empty():
+            task = self.work_queue.get()
+            print("任务id：" + str(task.getId()) + ", name: " + task.getName() + ", price: " + str(task.getPrice()))
+            self.work_results[str(task.getId())] = "OK"
 
-    def post(self, api):
-        
+
+if __name__ == "__main__":
+    w = Worker()
+    w.start()

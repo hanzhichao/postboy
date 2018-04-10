@@ -17,21 +17,28 @@ def load_json(path):
     """加载json文件,:param path: json文件路径 :return 字典格式"""
     if (platform.python_version()) < '3':
         import codecs
-        f = codecs.open(path, encoding='utf-8')
+        
         try:
+            f = codecs.open(path, encoding='utf-8')
             return  json.loads(remove_annotation(f))
+        except FileNotFoundError:
+            print("json文件打开失败")
         except ValueError:
             print("%s --- json decode error" % path)
             return None
+        finally:
+            f.close()
     else:
-        f = open(path, encoding='utf-8')
         try:
+            f = open(path, encoding='utf-8')
             return  json.loads(remove_annotation(f))
+        except FileNotFoundError:
+            print("json文件打开失败")
         except json.decoder.JSONDecodeError:
             print("%s --- json decode error" % path)
             return None
-
-    f.close()
+        finally:
+            f.close()
 
 
 if __name__ == '__main__':

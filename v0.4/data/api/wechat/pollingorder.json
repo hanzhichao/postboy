@@ -1,0 +1,11 @@
+{
+  "url": "http://test.spicespirit.com/api/user/getInfoById",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "event_key": "51"
+  },
+  "remark":"微信下单轮询接口"
+}

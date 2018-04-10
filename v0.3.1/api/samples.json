@@ -1,0 +1,49 @@
+[
+  {
+    "url": "http://192.168.100.238:8089/api/Istation/matchStation",
+    "data": {
+      "lng": "116.123",
+      "lat": "93.123"
+    }
+  },
+  {
+    "method": "POST",
+    "uri": "/api/Istation/matchStation",
+    "headers": {
+      "Content-Type": "application/json; utf-8"
+    },
+    "cookies": {},
+    "data": {
+      "lng": "${data1[0]}",
+      "lat": "${data1[1]}"
+    },
+    "session": "login",
+    "source": {
+      "data1": "data.txt",
+      "data2": "data.txt"
+    },
+    "sign": "station",
+    "store_response": {
+      "code": "response.code"
+    },
+    "concurrency": 1,
+    "times": 2,
+    "tags": [
+      "sample",
+      "no-run"
+    ],
+    "setup": {
+      "DB-198": [
+        "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='DP';",
+        "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='MX';"
+      ]
+    },
+    "teardown": {
+      "DB-198": [
+        "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='DP';",
+        "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='MX';"
+      ]
+    },
+    "assert": "response.code == \"100000\""
+  }
+]
