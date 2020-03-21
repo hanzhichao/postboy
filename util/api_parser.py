@@ -1,21 +1,17 @@
 #!/bin/env/python
 # coding=utf-8
 import json
+from config_parser import load_config
+from json_parser import load_json
 import requests
-import time
-import copy
-import re
-import sys
+import os
+from sign_maker import sign_params
 import logging
 from functools import wraps
+import time
+import inspect
+import re
 
-sys.path.append('..')
-
-from util.config_parser import load_config
-from util.json_parser import load_json
-from util.sign_maker import sign, sign_params
-from util.login import login
-from util.data_generator import data_generator
 
 
 logger = logging.getLogger("mylogger")
@@ -28,10 +24,22 @@ def exec_time(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         t0 = time.time()
+        parent_action = inspect.stack()[1][4][0].strip()
         back = func(*args, **kwargs)
-        print(func.__name__ + " --- " + str(time.time()-t0) + "s")
+        _exec_time = time.time()-t0
+        logger.debug(parent_action + '---' + func.__name__ + '---' + str("%.3fs" % _exec_time))
         return back
     return wrapper
+
+
+
+
+@exec_time
+def login():
+    session = requests.Session()
+    config = load_json(os.path.join(os.getcwd(), 'data/login.json'))
+    res = session.post(config.get('url'), headers=config.get('headers'), data=config.get('data'))
+    return session
 
 @exec_time
 def handle_session(api):
@@ -83,48 +91,21 @@ def handle_cookies(api):
     else:
         return {}
 
-
-# must before handle data
 @exec_time
-def handle_source(apis):
-    sources = {}
-    for api in apis:
-        source = api.get('source')
-        if source:
-            if isinstance(source, dict):
-                for key in source.keys():
-                    sources[key] = data_generator(source[key])
-            else:
-                print("source参数类型错误, 应为dict类型")
-    return sources
+def handle_data(api):
+    data = api.get('data')
 
-@exec_time
-def handle_data(api, sources):
-    data = copy.deepcopy(api).get('data')
+    format_data = api.get('format_data')
+    if format_data:
+        for key in api['data'].keys():
+            if '%s' in api['data'][key]:
+                data[key] = data[key] % json.dumps(api.get('_'+key))
 
-    # replace %s
-    for key in data.keys():
-        if '%s' in data[key]:
-            data[key] = data[key] % json.dumps(api.get('_'+key))
+    sign = api.get('sign')
+    if sign:
+        data = sign_params(sign.get('accessId'),sign.get('accessKey'),api['data'])
 
-        if data[key][:2] == '${' and  data[key][-1] == '}':
-            _param = data[key][2:-1]
-            if '[' not in _param or ']' not in _param:
-                _param = _param + '[0]'
-
-            _param_key = _param.split('[')[0]
-            _param_index = int(_param.split('[')[1][:-1])
-            data[key] = next(sources[_param_key])[_param_index]   # exception
-
-    # sign data
-    is_sign = api.get('sign')
-    if is_sign:
-        if isinstance(is_sign, dict):
-            data = sign_params(is_sign.get('accessId'), is_sign.get('accessKey'), api['data'])
-        else:
-            data = sign(data, is_sign)
-
-    # headers
+    # print(api.get('headers'))
     headers = api.get('headers')
     if headers and isinstance(headers, dict):
         for key in headers.keys():
@@ -133,8 +114,6 @@ def handle_data(api, sources):
                     data= json.dumps(data)
     return data
 
-
-@exec_time
 def handle_response(res, api):
     store_response = api.get('store_response')
     if store_response and isinstance(store_response, dict):
@@ -142,26 +121,31 @@ def handle_response(res, api):
             regax = r'\{\{(.*)\}\}'
             match_results = re.findall(regax, store_response[key])
             if match_results:
+                # print(match_results[0])
                 store_response[key] = res.get(match_results[0].strip())
     print(store_response)
 
 
-# 要求api是原来的api
+
+
+
+
+
+
+
+
+
 @exec_time
-def format_api(api, sources):
-    api = copy.deepcopy(api)
+def format_api(api):
     api['session'] = handle_session(api)
     api['url'] = handle_url(api)
     api['headers'] = handle_headers(api)
     api['cookies'] = handle_cookies(api)
-    api['data'] = handle_data(api, sources)
+    api['data'] = handle_data(api)
     return api
 
 
 if __name__ == '__main__':
-    api = {"url":"http://192.168.100.238:8089/api/Istation/matchStation","source":{"data1":"data.txt","data2":"data.txt"},"sign":"station","data":{"lng":"${data1[0]}","lat":"${data2[1]}"},"store_response":{"code":"{{ code }}"}}
-    sources = handle_source([api])
-    print(format_api(api, sources))
-    # print(api)
-    # print(format_api(api, sources))
-    # print(format_api(api, sources))
+    api = {"url":"http://192.168.100.238:8089/api/Istation/matchStation","sign":{"accessId":"CORE0002","accessKey":"BMLYkAKNcAthZbW7kQDUe8i4PmLoek"},"data":{"lng":"116.334223","lat":"39.975377"},"store_response":{"code":"{{ code }}"}}
+    res = {"code":100000,"message":"成功","data":{"station":"51","status":1}}
+    handle_response(res, api)
