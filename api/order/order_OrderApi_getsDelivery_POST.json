@@ -1,0 +1,11 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/getsDelivery",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "code":""
+  },
+  "remark": "取店面可配送的订单数据"
+}

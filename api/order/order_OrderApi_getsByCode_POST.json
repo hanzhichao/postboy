@@ -1,0 +1,12 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/getsByCode",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+     "code":"XXX",
+    "page_size ":"10000"
+  },
+  "remark": "按code批量获取订单主表信息"
+}

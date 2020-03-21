@@ -1,5 +1,6 @@
 #!/bin/env/python
 # coding=utf-8
+"""饿了么/美团/百度外卖 三方平台 测试/预发环境切换器"""
 import sys
 import json
 import requests
@@ -9,16 +10,7 @@ import time
 from threading import Thread
 import os
 from functools import wraps
-# from sign import sign_params
-from auth import signMaker
-
-# import sys
-# reload(sys)
-# sys.setdefaultencoding("utf-8")
-# import chardet
-# import io
-# import sys
-# sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030') #改变标准输出的默认编码
+from sign import sign_params
 
 
 if (platform.python_version()) < '3':
@@ -62,7 +54,7 @@ def load_json(path):
                 print("%s --- json decode error" % path)
 
 
-def login():   #  login.json中配的域名是test.spicespirit.com   api_file中的域名不一致时cookies不生效
+def login():
     session = requests.Session()
     config = load_json(os.path.join(os.path.dirname(__file__), 'login.json'))
     res = session.post(config.get('url'), headers=config.get('headers'), data=config.get('data'))
@@ -108,13 +100,12 @@ class PostBoy(object):
     def __init__(self, config_file=os.path.join(os.path.dirname(__file__), 'default.conf')):
         self.config = load_config(config_file)
         self.body_list = []
-        # self.file_data = {}
-        # self.data_index = 0
+        self.file_data = {}
 
 
     def read_api(self, api_file):
         api_list = []
-        params = {}
+        params = []
         api = load_json(api_file)
         if isinstance(api, dict):
             api_list.append(api)
@@ -136,6 +127,48 @@ class PostBoy(object):
                         api['data'][key] = api['data'][key] % json.dumps(api.get('_'+key))
             
 
+            # handle data file
+            for key in api['data'].keys():
+                if api['data'][key][:2] == '${' and  api['data'][key][-1] == '}':
+                    tmp_param = api['data'][key][2:-1]
+                    # print(tmp_param)
+                    if "|" in tmp_param:
+                        tmp_list = tmp_param.split("|")
+                        if tmp_list[0].lower() == 'file':
+                            with open(tmp_list[1],'r') as f:
+                                lis = [x.strip().split(",") for x in f ]
+
+                            data_cols = list(zip(*lis))
+                            # print(list(zip(*lis)))
+                            # for x in zip(*lis):
+                            #     print(x)
+                            if tmp_list[2][0] == '$' and tmp_list[2][1:].isdigit():
+                                index = int(tmp_list[2][1:])
+                                # print(index)
+                                # print(data_cols[index])
+
+                                self.file_data[key] = list(data_cols[index])
+                                # first = self.file_data[0]
+                                # api['data'][key] = first
+                                # self.file_data.append(first)
+                                # self.file_data.pop(0)
+
+
+                                # tmp_data = f.readlines()
+                            # # print(tmp_data)
+                            # lines = []
+                            # for line in tmp_data:
+                            #     if line[-1] == '\n':
+                            #         line = line[:-1]
+                            #     line = line.split(',')
+                            #     lines.append(line)
+                            # print(lines)
+
+
+
+
+
+
 
             # need sign or not
             if api.get('sign'):
@@ -146,7 +179,7 @@ class PostBoy(object):
             if sign:
                 accessId = sign.get('accessId')
                 accessKey = sign.get('accessKey')
-                params['data'] = signMaker(accessId,accessKey,api['data'])
+                params['data'] = sign_params(accessId,accessKey,api['data'])
             else:
                 params['data'] = api['data']
 
@@ -165,7 +198,6 @@ class PostBoy(object):
                 params['login_required'] = False if self.config.get('login_required')=='False' else True
 
 
-
             # handle cookies
             if api.get('cookies'):
                 params['cookies'] = api.get('cookies')
@@ -182,15 +214,16 @@ class PostBoy(object):
             self.body_list.append(params)
 
 
-    # def change_data(self):
-    #     for i in range(0, len(self.body_list)):
-    #         for key in self.file_data.keys():
-    #             first = self.file_data[key][0]
-    #             print(self.body_list,i,first,type(self.body_list[i]))
-                # self.body_list[i]['data'][key] = first
-                # api['data'][key] = first
-                # self.file_data[key].append(first)
-                # self.file_data[key].pop(0)
+    def change_data(self):
+        
+        for i in range(0, len(self.body_list)):
+            for key in self.file_data.keys():
+                first = self.file_data[key][0]
+                self.body_list[i]['data'][key] = first
+                api['data'][key] = first
+                self.file_data[key].append(first)
+                self.file_data[key].pop(0)
+            
 
 
     def post(self, api_file):
@@ -210,42 +243,33 @@ class PostBoy(object):
                     cookies=params.get('cookies'), 
                     data=params.get('data'))
 
-                # try:
-                #     print(json.dumps(res.json(), ensure_ascii=False, indent=2))
-                # except json.decoder.JSONDecodeError:  # only python3
-                #     try:
-                #         print(res.text)
-                #     except UnicodeEncodeError:
-                #         html = res.content
-                #         html_doc=html.decode("utf-8","ignore").replace('\xa9', '')
-                #         print(html_doc)
-
+                try:
+                    print(json.dumps(res.json(), ensure_ascii=False, indent=2))
+                except json.decoder.JSONDecodeError:
+                    print(res.content)
                 # print(json.dumps(res.json(), indent=2))
 
                 # print(res.text)  # [Decode error - output not utf-8]
-                if res.status_code == 200:
-                    print("%s ------ PASS" % api_file)
-                else:
-                    print("%s ------ FAIL" % api_file)
+                # if '"code":100000' in res.text:
+                #     print("%s ------ PASS" % api_file)
+                # else:
+                #     print("%s ------ FAIL" % api_file)
 
             _post()
                                                 
 
 def main():
-    results = []
     if len(sys.argv) > 1:
         # print(sys.argv[1])                           
-        # postboy = PostBoy()
+        postboy = PostBoy()
         if os.path.isdir(sys.argv[1]):
             for root, dirs, files in os.walk(sys.argv[1], topdown=False):
                 for name in files:
                     if name[-5:] == '.json':
                         # print(os.path.join(root, name))
-                        postboy = PostBoy()
                         postboy.post(os.path.join(root, name))
 
         elif os.path.isfile(sys.argv[1]):
-            postboy = PostBoy()
             postboy.post(sys.argv[1])
         else:
             print("文件不存在")
@@ -257,11 +281,11 @@ main()
 # post('api/getGoodsCode.json', 'http://detail.spicespirit.com') 
 
 # print(load_json("D:\Projects\postboy\api\Istation\matchStation.json"))
-# postboy = PostBoy()
-# postboy.read_api("D:/Projects/postboy/v0.4/data/api/shop/matchStation.json")
-# print(postboy.body_list[0]['data'])
+postboy = PostBoy()
+postboy.read_api("D:/Projects/postboy/v0.4/data/api/shop/matchStation.json")
+print(postboy.body_list[0]['data'])
 # print(postboy.file_data)
-# postboy.change_data()
+
 # postboy.read_api("D:/Projects/postboy/v0.4/data/api/shop/matchStation.json")
 # print(postboy.body_list)
 # print(postboy.file_data)

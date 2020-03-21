@@ -19,19 +19,29 @@
 3. 命令行运行 python post.py getUserByID.json
 
 ## 接口样例
-1. 最少参数样例
 ```
 {
-  "uri": "http://****/api/user/getInfoById",
-  "data": {"id": "51"}
+  "url": "http://192.168.100.238:8082/api/user/getInfoById",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "id": "51"
+  },
+  "remark":"根据用户ID获取用户信息"
 }
 ```
-2. 最多参数样例
+需要替换参数的接口样例---指定fromat_data : true
 ```
 {
   "uri": "/api/ITakeaway/w",
-  "headers": {"Connection": "keep-alive","Content-Type": "application/x-www-form-urlencoded"},
-  "cookies": {"PHPSESSID": "fd34e161b19433fb1cb39150cb5f17dc","perf_ssid": "bkuzbkhr8tld9gii0mghidoyipto7agi_2018-01-19"},
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  "cookies": {
+    "PHPSESSID": "fd34e161b19433fb1cb39150cb5f17dc"
+  },
   "concurrency": "5",
   "times": "10",
   "format_data": true,
@@ -41,14 +51,34 @@
   "_params": {
     "address_id": "64948",
     "delivery_date": "2018-01-18",
+    "start_time": "10:42:25",
+    "end_time": "11:42:25",
+    "is_reserve": "2",
+    "invoice_id": "0",
+    "money": "22.00",
+    "discount": "0",
+    "freight": "20.00",
+    "received": "42.00",
+    "is_invoice": "2",
+    "is_activity": "2",
+    "activity": "nothing",
+    "red_envelope": "nothing",
+    "pay_way": "2",
+    "pay_channel": "4",
     "products": [
       {
         "id": "23",
         "num": "1"
       }
     ],
+    "remark": "",
+    "user_scope": "1",
+    "channel": "14",
+    "card_amount": "0",
+    "card_id": "",
+    "user_id": "83",
+    "station_id": "53"
   },
-  "remark": "最多参数样例",
 }
 ```
 
@@ -68,6 +98,3 @@
 * json数据文件不支持注释
 * 不容易区分参数是否必选
 
-"assert_response":"\"code\":100000"   # assert json.dumps(response)  contains "code":100000
-"assert_response":{"code":100000, "error": 0}   # assert response["code"] == 100000 and response["error"] == 0  if response is not json,response = json.loads(response)
-"assert_response": null ---default   assert response code=200

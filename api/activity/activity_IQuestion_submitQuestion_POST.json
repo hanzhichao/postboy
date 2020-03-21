@@ -1,0 +1,11 @@
+{
+  "url": "http://192.168.100.238:8082/Api/IQuestion/submitQuestion",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+
+  },
+  "remark": "提交问卷调查信息"
+}

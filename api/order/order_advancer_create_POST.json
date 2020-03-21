@@ -1,0 +1,19 @@
+{
+  "url": "http://dev2.spicespirit.com/order/advancer/create",
+  "data": {
+    "phone": "1111111111",
+    "name": "你猜",
+    "sex": 1,
+    "province": "你猜",
+    "city": "你猜",
+    "area": "你猜",
+    "address": "你猜",
+    "supplement_address": "你猜",
+    "lat": "你猜",
+    "lng": "你猜",
+    "delivery_date": "9209-12-31",
+    "start_time": "10:21:31",
+    "end_time": "11:21:31"
+  },
+  "remark": "预售单1期（问卷调查订单接口）"
+}

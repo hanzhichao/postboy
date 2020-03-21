@@ -1,0 +1,16 @@
+{
+  "url": "http://stock.spicespirit.com/api/OrderApi/getByCategory",
+  "sign": {
+    "accessId": "CORE0001",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "station_id": "XXX",
+    "category": "",
+    "begintime": "",
+    "endtime": "",
+    "limit": 0,
+    "offset": 0
+  },
+  "remark": "按状态取订单"
+}
