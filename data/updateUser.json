@@ -1,0 +1,11 @@
+[{
+    "url": "http://127.0.0.1:5000/api/user/getToken/",
+    "method": "get",
+    "params": {"appid": "136425"},
+    "store": {"token": "response.text.split('=')[1]"}
+},
+{   "url": "http://127.0.0.1:5000/api/user/updateUser/?token=%(token)s",
+    "headers": {"Content-Type": "application/json"},
+    "data": {"name": "张三","password": "123456"}
+}
+]

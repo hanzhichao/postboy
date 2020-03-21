@@ -1,0 +1,8 @@
+{
+    "cmd": ["/Library/Frameworks/Python.framework/Versions/3.6/bin/python3","-u","/Users/apple/Applications/PostJson/post_json.py","$file"],
+    "file_regex": "^[ ] *File \"(...*?)\", line ([0-9]*)",
+    "selector": "source.json",
+    "env": {"PYTHONIOENCODING": "utf8"}, 
+    // "shell": true,
+    // "working_dir": "$file_path"
+}

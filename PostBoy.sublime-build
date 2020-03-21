@@ -1,7 +1,0 @@
-{
-    "cmd": ["python","D:/Projects/postboy/postboy.py","$file"],
-    "file_regex": "^[ ] *File \"(...*?)\", line ([0-9]*)",
-    "selector": "source.json",
-    "encoding":"cp936",
-}
-

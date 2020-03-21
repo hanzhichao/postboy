@@ -1,0 +1,6 @@
+{
+    "cmd": ["python3","/Users/apple/Documents/Projects/api_cource/坚果10h版资料/第三天/PostJson/post_json.py","$file"],
+    "file_regex": "^[ ] *File \"(...*?)\", line ([0-9]*)",
+    "selector": "source.json",
+    "encoding":"cp936",
+}

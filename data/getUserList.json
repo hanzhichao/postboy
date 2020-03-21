@@ -1,0 +1,11 @@
+[
+  {
+    "url": "http://127.0.0.1:5000/api/user/login/",
+    "method": "post",
+    "data": {"name": "张三","password": "123456"}
+  },
+  {
+    "url": "http://127.0.0.1:5000/api/user/getUserList/",
+    "method": "get"
+  }
+]
