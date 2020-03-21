@@ -18,9 +18,17 @@
 2. 新建json，api文件,例如getUserById.json
 3. 命令行运行 python post.py getUserByID.json
 
-## 接口样例 -- 支持解析/过滤/ 和/**/注释（Pretty Json不支持)
+## 接口样例
+1. 最少参数样例
 ```
-[  // 第一个接口，最小配置，默认headers {Content-Type: application/wwwurlencode}
+{
+  "uri": "http://****/api/user/getInfoById",
+  "data": {"id": "51"}
+}
+```
+2. 最多参数样例
+```
+[
   {
     "url": "http://192.168.100.238:8089/api/Istation/matchStation",
     "data": {
@@ -28,46 +36,48 @@
       "lat": "93.123"
     }
   },
-  // 第二各接口，全参数示例
   {
-    "method": "POST",   // GET, POST , PUT, HEAD, ...
-    "uri": "/api/Istation/matchStation",    // base_url 从配置文件中读取
+    "method": "POST",
+    "uri": "/api/Istation/matchStation",
     "headers": {
       "Content-Type": "application/json; utf-8"
     },
-    "cookies": {},    //支持Cookies
+    "cookies": {},
     "data": {
-      "lng": "${data1[0]}",    //source字段data1对应的数据文件中的第1列，循环取
+      "lng": "${data1[0]}",
       "lat": "${data1[1]}"
     },
-    "session": "login",     //是否调用需要登录
-
-    
-    "source": {             // 数据文件
+    "session": "login",
+    "source": {
       "data1": "data.txt",
       "data2": "data.txt"
     },
-    "sign": "station",     // 签名字段
-
-
-    "store_response": {    // 存储response中的字段，可用于同文件，该api之后的api使用
+    "sign": "station",
+    "store_response": {
       "code": "response.code"
     },
-
-    "concurrency": 1,     // 并发数
-    "times": 2,           // 总执行次数
-
-    "tags": ["sample", "no-run"],    // 标签，永远测试时有选择的执行
-
-    "setup": {"DB-198":["UPDATE SET amount = 100 WHERE station_id=57 and goods_code='DP';", 
-            "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='MX';"]},  // 执行该接口前准备
-    "teardown": {"DB-198":["UPDATE SET amount = 0 WHERE station_id=57 and goods_code='DP';", 
-            "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='MX';"]},   //执行该接口后清理
-
-    "assert": "response.code == \"100000\""   // 断言response
+    "concurrency": 1,
+    "times": 2,
+    "tags": [
+      "sample",
+      "no-run"
+    ],
+    "setup": {
+      "DB-198": [
+        "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='DP';",
+        "UPDATE SET amount = 100 WHERE station_id=57 and goods_code='MX';"
+      ]
+    },
+    "teardown": {
+      "DB-198": [
+        "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='DP';",
+        "UPDATE SET amount = 0 WHERE station_id=57 and goods_code='MX';"
+      ]
+    },
+    "assert": "response.code == \"100000\""
   }
-]```
-
+]
+```
 
 ## Sublime Text  编译json接口，使用方法
 1. Sublime Text3 -> Tools -> Build System -> New Build System
@@ -82,10 +92,9 @@
 3. 在json接口文件窗口，选择编译系统为postboy(或自动)，按Ctrl+B 编译
 
 ## 已知问题
+* json数据文件不支持注释
 * 不容易区分参数是否必选
 
 "assert_response":"\"code\":100000"   # assert json.dumps(response)  contains "code":100000
 "assert_response":{"code":100000, "error": 0}   # assert response["code"] == 100000 and response["error"] == 0  if response is not json,response = json.loads(response)
 "assert_response": null ---default   assert response code=200
-
-

@@ -1,0 +1,17 @@
+{
+  "url": "http://192.168.100.238:8089/api/Istation/matchStation",
+  "source": {
+    "data1": "data.txt",
+    "data2": "data.txt"
+  },
+  "concurrency":1,
+  "times": 3,
+  "sign": "station",
+  "data": {
+    "lng": "${data1[0]}",
+    "lat": "${data2[1]}"
+  },
+  "store_response": {
+    "code": "{{ code }}"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "url": "http://192.168.100.238:8089/api/Istation/getGoodsCode",
+  "sign": {
+    "accessId": "CORE0002",
+    "accessKey": "BMLYkAKNcAthZbW7kQDUe8i4PmLoek"
+  },
+  "data": {
+    "area_name": "北京省",
+    "lng": "116.337909",
+    "lat": "39.950365"
+  },
+  "remark":"根据经纬度定位站点"
+}

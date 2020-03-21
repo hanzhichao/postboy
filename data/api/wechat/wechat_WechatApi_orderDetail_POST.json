@@ -1,7 +1,0 @@
-{
-  "url": "http://dev2.spicespirit.com/api/WechatApi/orderDetail",
-  "data": {
-    "order_code": "109999999999999"
-  },
-  "remark": "微信订单详情"
-}

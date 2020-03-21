@@ -1,20 +1,18 @@
 #!/bin/env/python
 # coding=utf-8
-
 import sys
 import requests
 import time
 import os
-# sys.path.append('..')
+import json
+import copy
+from threading import Thread
+from functools import wraps
+
 from util.sign_maker import sign_params
 from util.config_parser import load_config
 from util.json_parser import load_json
-from threading import Thread
-from functools import wraps
-import json
-from util.api_parser import format_api
-from util.api_parser import exec_time
-
+from util.api_parser import format_api, handle_source, exec_time
 
 
 def threads(func):
@@ -69,47 +67,68 @@ def threads(func):
     return wrapper
 
 
-
 class PostBoy(object):
-    def __init__(self, config_file=os.path.join(os.getcwd(), 'conf/default.conf')):
+    @exec_time
+    def __init__(self, api_file, config_file='default.conf'):
+        self.api_file = api_file
         self.config = load_config(config_file)
-   
-    @exec_time
-    def mix_api(self, api_file):
-        api_list = []
-        config = self.config.copy()
-        # config = load_config(self.config_file)
-        for api in list(load_json(api_file)):
-            config.update(api)
-            formatted_api = format_api(config)
-            api_list.append(formatted_api)
-
-        return api_list
+        apis = load_json(api_file)
+        self.apis = apis if isinstance(apis, list) else [apis]
+        self.apis = self.mix_apis()
+        self.sources = handle_source(self.apis)
+        if os.path.basename(api_file)[0:4].lower() == 'test':
+            self.mode = 'Test'
+        else:
+            self.mode = 'Debug'
+        print(self.mode)
 
     @exec_time
+    def mix_apis(self):
+        config = copy.deepcopy(self.config)
+        func = lambda x:config if config.update(x) else config
+        return list(map(func, self.apis))
+
+    @exec_time
+    def update_data(self, api):
+        return format_api(api, self.sources)
+
+
+
     @threads
     def post(self, api):
-        # print(api)
+
         method = api.get('method')
         if not method or method.upper() == 'POST':
             start_time = time.time()
+
             session = api.get('session')
             url = api.get('url')
             headers = api.get('headers')
             cookies = api.get('cookies')
             data = api.get('data')
+            @exec_time
+            def _post():
+                res = session.post(url, headers=headers, cookies=cookies, data=data)
+                return res
 
-            res = session.post(url, headers=headers, cookies=cookies, data=data)
-
-            print(json.dumps(res.json(), ensure_ascii=False)),
-            print("--- %.3fs" % (time.time()-start_time))
+            res = _post()
+            if self.mode == 'Debug':
+                print(data)
+                print(json.dumps(res.json(), ensure_ascii=False))
+                print("--- %.3fs" % (time.time()-start_time))
+            else:
+                print(res.text)
+                if '"code":100000' in res.text:
+                    print("%s ------ PASS" % self.api_file)
+                else:
+                    print("%s ------ FAIL" % self.api_file)
             # print(json.dumps(res.json(), ensure_ascii=False, indent=2))     # to handle ISO-8895-1
 
 
-    def send_request(self, api_file):
-        for api in self.mix_api(api_file):         
-            self.post(api) 
-                                                
+    def send_request(self):
+        for api in self.apis:
+            self.post(self.update_data(api))
+                  
 
 # def main():
 #     if len(sys.argv) > 1:
@@ -118,13 +137,10 @@ class PostBoy(object):
 #         postboy.post(sys.argv[1])
     
 
-# # if __name__ != '__main__':
-# main()
-# post('api/user/getInfoById') 
-# post('api/getGoodsCode.json', 'http://detail.spicespirit.com') 
+if __name__ == '__main__':
+    # main()
+    # post('api/user/getInfoById') 
+    # post('api/getGoodsCode.json', 'http://detail.spicespirit.com') 
 
-# print(load_json("D:\Projects\postboy\api\Istation\matchStation.json"))
-postboy = PostBoy()
-postboy.send_request("data/api/shop/matchStation.json")
-# postboy.read_api("D:\Projects\postboy\api\Istation\matchStation.json")
-# print(postboy.params)
+    pb = PostBoy("api/shop/test_matchStation.json")
+    pb.send_request()
