@@ -1,8 +1,0 @@
-{
-  "url": "http://dev2.spicespirit.com/api/WechatApi/paySetData",
-  "data": {
-    "order_code":"XXX",
-    "channel":"XXX"
-  },
-  "remark": "微信支付"
-}

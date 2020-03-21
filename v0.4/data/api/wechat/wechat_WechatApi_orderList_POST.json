@@ -1,9 +1,0 @@
-{
-  "url": "http://dev2.spicespirit.com/api/WechatApi/orderList",
-  "data": {
-    "user_id": "1223",
-    "limit": 0,
-    "offset": 0
-  },
-  "remark": "微信订单list"
-}
